@@ -1,24 +1,27 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+// Global imports
+import React, { useEffect } from "react";
+import "./App.css";
+
+// Local imports
+import LoginPage from "./components/LoginPage";
+import { _getUsers } from "./backend/_DATA";
+
+function Loading() {
+  return <div>Loading...</div>;
+}
 
 function App() {
+  const [userList, setUserList] = React.useState(null);
+
+  useEffect(() => {
+    _getUsers().then((users) => {
+      setUserList(users);
+    });
+  }, []);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {userList === null ? <Loading /> : <LoginPage userList={userList} />}
     </div>
   );
 }
