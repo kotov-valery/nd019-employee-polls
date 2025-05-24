@@ -1,6 +1,12 @@
-import { logger } from "./logger";
-import { Middleware } from "redux";
+import { AnyAction, Middleware } from "redux";
+import { thunk, ThunkMiddleware } from "redux-thunk";
 
-const middleware: Middleware[] = [logger];
+import { logger } from "./logger";
+import { RootState } from "../reducers";
+
+const middleware: Middleware[] = [
+  thunk as ThunkMiddleware<RootState, AnyAction>,
+  logger,
+];
 
 export default middleware;
