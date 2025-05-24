@@ -1,10 +1,15 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+
+import { setAuthedUser } from "../redux/actions/authedUser";
 
 function LoginPage({ userList }: { userList: any }) {
   const [selectedUser, setSelectedUser] = useState("");
+  const dispatch = useDispatch();
 
   const handleLogin = () => {
     if (selectedUser) {
+      dispatch(setAuthedUser(selectedUser));
       console.log(`Logged in as ${userList[selectedUser].name}`);
     } else {
       console.error("Please select a user to log in.");
