@@ -4,8 +4,8 @@ function User({ authedUser }: { authedUser: string | null }) {
   }
 
   return (
-    <div className="user">
-      <h1>Welcome, {authedUser}!</h1>
+    <div className="user-info">
+      Logged in as: <strong>{authedUser}</strong>
     </div>
   );
 }

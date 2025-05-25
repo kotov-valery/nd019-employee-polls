@@ -45,9 +45,11 @@ function App() {
 
   return (
     <Fragment>
-      <div className="container">
+      <header className="app-header">
         <Nav />
         <User authedUser={authedUser} />
+      </header>
+      <div className="container">
         <Routes>
           <Route
             path="/"
