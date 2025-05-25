@@ -1,0 +1,21 @@
+/* Nav styling */
+nav {
+  display: flex;
+  gap: 15px; /* Add spacing between navigation items */
+}
+
+nav a {
+  text-decoration: none;
+  color: #007bff; /* Link color */
+  font-weight: bold;
+}
+
+nav a:hover {
+  text-decoration: underline;
+}
+
+/* User styling */
+.user-info {
+  font-size: 14px;
+  color: #333;
+}
