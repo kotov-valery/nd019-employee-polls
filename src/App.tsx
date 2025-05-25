@@ -11,6 +11,7 @@ import { QuestionList, UserList } from "./backend/Types";
 import Dashboard from "./components/Dashboard";
 import Nav from "./components/Nav";
 import NewPoll from "./components/NewPoll";
+import User from "./components/User";
 
 function Loading() {
   return <div>Loading...</div>;
@@ -39,6 +40,7 @@ function App() {
       {loading ? <Loading /> : null}
       <div className="container">
         <Nav />
+        <User authedUser={authedUser} />
         {loading === true ? null : (
           <Routes>
             <Route
