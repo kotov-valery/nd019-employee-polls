@@ -12,7 +12,7 @@ function Leaderboard({ userList }: { userList: UserList | null }) {
   return (
     <div className="leaderboard">
       <h1>Leaderboard</h1>
-      <table>
+      <table className="leaderboard-table">
         <thead>
           <tr>
             <th>Rank</th>
