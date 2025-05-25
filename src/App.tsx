@@ -10,6 +10,7 @@ import { _getQuestions, _getUsers } from "./backend/_DATA";
 import { QuestionList, UserList } from "./backend/Types";
 import Dashboard from "./components/Dashboard";
 import Nav from "./components/Nav";
+import NewPoll from "./components/NewPoll";
 
 function Loading() {
   return <div>Loading...</div>;
@@ -59,6 +60,7 @@ function App() {
                 )
               }
             />
+            <Route path="/new" element={<NewPoll />} />
           </Routes>
         )}
       </div>
