@@ -12,6 +12,7 @@ import Dashboard from "./components/Dashboard";
 import Nav from "./components/Nav";
 import NewPoll from "./components/NewPoll";
 import User from "./components/User";
+import Leaderboard from "./components/Leaderboard";
 
 function Loading() {
   return <div>Loading...</div>;
@@ -53,16 +54,11 @@ function App() {
                 )
               }
             />
-            <Route
-              path="/dashboard"
-              element={
-                userName &&
-                questions && (
-                  <Dashboard authedUser={userName} questions={questions} />
-                )
-              }
-            />
             <Route path="/new" element={<NewPoll />} />
+            <Route
+              path="/leaderboard"
+              element={<Leaderboard userList={userList} />}
+            />
           </Routes>
         )}
       </div>

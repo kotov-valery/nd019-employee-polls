@@ -11,7 +11,7 @@ function Nav() {
           <Link to="/new">New Poll</Link>
         </li>
         <li>
-          <Link to="/dashboard">Dashboard</Link>
+          <Link to="/leaderboard">Leaderboard</Link>
         </li>
       </ul>
     </nav>

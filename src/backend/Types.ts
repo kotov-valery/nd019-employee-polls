@@ -1,6 +1,10 @@
 export type User = {
   id: string;
   name: string;
+  answers: {
+    [key: string]: string;
+  };
+  questions: string[];
 };
 
 export type UserList = {
