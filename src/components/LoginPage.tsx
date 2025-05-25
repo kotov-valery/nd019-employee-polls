@@ -13,7 +13,7 @@ function LoginPage({ userList }: { userList: any }) {
     if (selectedUser) {
       dispatch(setAuthedUser(selectedUser));
       console.log(`Logged in as ${userList[selectedUser].name}`);
-      navigate("/dashboard");
+      navigate("/");
     } else {
       console.error("Please select a user to log in.");
     }

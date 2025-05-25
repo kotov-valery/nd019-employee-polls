@@ -1,6 +1,6 @@
 // Global imports
 import React, { useEffect, Fragment } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { Routes, Route } from "react-router-dom";
 
 // Local imports
@@ -13,54 +13,52 @@ import Nav from "./components/Nav";
 import NewPoll from "./components/NewPoll";
 import User from "./components/User";
 import Leaderboard from "./components/Leaderboard";
+import { handleInitialData } from "./redux/actions/init";
+import { AppDispatch } from "./redux/store";
 
 function Loading() {
   return <div>Loading...</div>;
 }
 
 function App() {
-  const [userList, setUserList] = React.useState<UserList | null>(null);
-  const [questions, setQuestions] = React.useState<QuestionList | null>(null);
+  const dispatch: AppDispatch = useDispatch();
+
+  const userList = useSelector((state: any) => state.users);
+  const questions = useSelector((state: any) => state.questions);
 
   const authedUser = useSelector((state: any) => state.authedUser);
+  const isLoading = useSelector((state: any) => state.loading);
 
-  const loading = userList === null || questions === null;
   const userName = userList !== null ? userList[authedUser]?.name : "";
 
   useEffect(() => {
-    _getUsers().then((users) => {
-      setUserList(users);
-    });
-    _getQuestions().then((questions) => {
-      setQuestions(questions);
-    });
-  }, []);
+    dispatch(handleInitialData());
+  }, [dispatch]);
+
+  if (isLoading) {
+    return <Loading />;
+  }
+
+  if (!authedUser) {
+    return <LoginPage userList={userList} />;
+  }
 
   return (
     <Fragment>
-      {loading ? <Loading /> : null}
       <div className="container">
         <Nav />
         <User authedUser={authedUser} />
-        {loading === true ? null : (
-          <Routes>
-            <Route
-              path="/"
-              element={
-                !authedUser ? (
-                  <LoginPage userList={userList} />
-                ) : (
-                  <Dashboard authedUser={userName} questions={questions} />
-                )
-              }
-            />
-            <Route path="/new" element={<NewPoll />} />
-            <Route
-              path="/leaderboard"
-              element={<Leaderboard userList={userList} />}
-            />
-          </Routes>
-        )}
+        <Routes>
+          <Route
+            path="/"
+            element={<Dashboard authedUser={userName} questions={questions} />}
+          />
+          <Route path="/new" element={<NewPoll />} />
+          <Route
+            path="/leaderboard"
+            element={<Leaderboard userList={userList} />}
+          />
+        </Routes>
       </div>
     </Fragment>
   );
