@@ -1,14 +1,20 @@
-import QuestionItem from "./QuestionItem";
+import DashboardItem from "./DashboardItem";
 
-function Qeustions({ title, questions }: { title: string; questions: any }) {
+function DashboardList({
+  title,
+  questions,
+}: {
+  title: string;
+  questions: any;
+}) {
   return (
-    <div className="questions">
-      <h1>{title}</h1>
-      <ul>
+    <div>
+      <h2>{title}</h2>
+      <ul className="dashboard-list">
         {Object.keys(questions).map((questionId) => {
           const question = questions[questionId];
           return (
-            <QuestionItem
+            <DashboardItem
               key={questionId}
               questionId={questionId}
               question={question}
@@ -20,4 +26,4 @@ function Qeustions({ title, questions }: { title: string; questions: any }) {
   );
 }
 
-export default Qeustions;
+export default DashboardList;

@@ -8,7 +8,7 @@ import "./App.css";
 import LoginPage from "./components/LoginPage";
 import { _getQuestions, _getUsers } from "./backend/_DATA";
 import { QuestionList, UserList } from "./backend/Types";
-import Dashboard from "./components/Dashboard";
+import Dashboard from "./components/dashboard/Dashboard";
 import Nav from "./components/Nav";
 import NewPoll from "./components/NewPoll";
 import User from "./components/User";
@@ -53,7 +53,9 @@ function App() {
         <Routes>
           <Route
             path="/"
-            element={<Dashboard authedUser={userName} questions={questions} />}
+            element={
+              <Dashboard user={userList[authedUser]} questions={questions} />
+            }
           />
           <Route path="/new" element={<NewPoll />} />
           <Route
