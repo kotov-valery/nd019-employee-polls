@@ -1,6 +1,7 @@
 // Global imports
-import React, { useEffect } from "react";
+import React, { useEffect, Fragment } from "react";
 import { useSelector } from "react-redux";
+import { Routes, Route } from "react-router-dom";
 
 // Local imports
 import "./App.css";
@@ -8,6 +9,7 @@ import LoginPage from "./components/LoginPage";
 import { _getQuestions, _getUsers } from "./backend/_DATA";
 import { QuestionList, UserList } from "./backend/Types";
 import Dashboard from "./components/Dashboard";
+import Nav from "./components/Nav";
 
 function Loading() {
   return <div>Loading...</div>;
@@ -19,6 +21,9 @@ function App() {
 
   const authedUser = useSelector((state: any) => state.authedUser);
 
+  const loading = userList === null || questions === null;
+  const userName = userList !== null ? userList[authedUser]?.name : "";
+
   useEffect(() => {
     _getUsers().then((users) => {
       setUserList(users);
@@ -28,26 +33,36 @@ function App() {
     });
   }, []);
 
-  if (!userList) {
-    return <Loading />;
-  }
-
-  if (authedUser && userList) {
-    const userName = userList[authedUser]?.name;
-    if (!questions) {
-      return <Loading />;
-    }
-    return (
-      <div className="App">
-        <Dashboard authedUser={userName} questions={questions} />
-      </div>
-    );
-  }
-
   return (
-    <div className="App">
-      <LoginPage userList={userList} />
-    </div>
+    <Fragment>
+      {loading ? <Loading /> : null}
+      <div className="container">
+        <Nav />
+        {loading === true ? null : (
+          <Routes>
+            <Route
+              path="/"
+              element={
+                !authedUser ? (
+                  <LoginPage userList={userList} />
+                ) : (
+                  <Dashboard authedUser={userName} questions={questions} />
+                )
+              }
+            />
+            <Route
+              path="/dashboard"
+              element={
+                userName &&
+                questions && (
+                  <Dashboard authedUser={userName} questions={questions} />
+                )
+              }
+            />
+          </Routes>
+        )}
+      </div>
+    </Fragment>
   );
 }
 

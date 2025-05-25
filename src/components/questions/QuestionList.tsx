@@ -1,6 +1,6 @@
 import QuestionItem from "./QuestionItem";
 
-function QeustionList({ title, questions }: { title: string; questions: any }) {
+function Qeustions({ title, questions }: { title: string; questions: any }) {
   return (
     <div className="questions">
       <h1>{title}</h1>
@@ -20,4 +20,4 @@ function QeustionList({ title, questions }: { title: string; questions: any }) {
   );
 }
 
-export default QeustionList;
+export default Qeustions;

@@ -1,16 +1,19 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 import { setAuthedUser } from "../redux/actions/authedUser";
 
 function LoginPage({ userList }: { userList: any }) {
   const [selectedUser, setSelectedUser] = useState("");
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleLogin = () => {
     if (selectedUser) {
       dispatch(setAuthedUser(selectedUser));
       console.log(`Logged in as ${userList[selectedUser].name}`);
+      navigate("/dashboard");
     } else {
       console.error("Please select a user to log in.");
     }

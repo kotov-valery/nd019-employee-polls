@@ -1,13 +1,17 @@
 import { QuestionList } from "../backend/Types";
-import QeustionList from "./questions/QuestionList";
+import Qeustions from "./questions/QuestionList";
 
 function Dashboard({
   authedUser,
   questions,
 }: {
   authedUser: string;
-  questions: QuestionList;
+  questions: QuestionList | null;
 }) {
+  if (!authedUser || !questions) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <div className="dashboard">
       <h1>Dashboard</h1>
@@ -15,10 +19,10 @@ function Dashboard({
         <h1>Welcome to dashboard, {authedUser}!</h1>
       </div>
       <div>
-        <QeustionList title="New questions" questions={questions} />
+        <Qeustions title="New questions" questions={questions} />
       </div>
       <div>
-        <QeustionList title="Answered questions" questions={questions} />
+        <Qeustions title="Answered questions" questions={questions} />
       </div>
     </div>
   );
