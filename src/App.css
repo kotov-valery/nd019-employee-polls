@@ -1,6 +1,7 @@
 @import "./styles/dashboard.css";
 @import "./styles/leaderboard.css";
 @import "./styles/nav.css";
+@import "./styles/newpoll.css";
 
 /* Header styling */
 .app-header {
