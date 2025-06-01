@@ -20,6 +20,7 @@
 .dashboard-cards {
   display: flex;
   gap: 20px; /* Space between the cards */
+  padding: 10px;
   flex-wrap: wrap; /* Allow wrapping on smaller screens */
   justify-content: space-between; /* Distribute cards evenly */
 }
@@ -29,14 +30,10 @@
   flex: 1 1 calc(50% - 20px); /* Take up 50% of the width minus the gap */
   background-color: #f9f9f9; /* Light gray background */
   padding: 20px;
+  margin: 10px;
   border-radius: 8px; /* Rounded corners */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
   transition: transform 0.2s ease, box-shadow 0.2s ease; /* Hover effect */
-}
-
-.dashboard-card:hover {
-  transform: translateY(-5px); /* Slightly lift the card */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Stronger shadow on hover */
 }
 
 /* Question list title */
