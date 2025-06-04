@@ -1,3 +1,5 @@
+import { useNavigate } from "react-router-dom";
+
 import { Question } from "../../backend/Types";
 
 function DashboardItem({
@@ -7,7 +9,12 @@ function DashboardItem({
   questionId: string;
   question: Question;
 }) {
+  const navigate = useNavigate();
+
   const formattedDate = new Date(question.timestamp).toLocaleString();
+  const handleShow = () => {
+    navigate(`/questions/${question.id}`);
+  };
 
   return (
     <li key={questionId} className="dashboard-item">
@@ -16,7 +23,9 @@ function DashboardItem({
         <div className="dashboard-item-timestamp">{formattedDate}</div>
       </div>
       <hr className="dashboard-item-divider" />
-      <button className="dashboard-item-button">Show</button>
+      <button className="dashboard-item-button" onClick={handleShow}>
+        Show
+      </button>
     </li>
   );
 }

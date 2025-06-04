@@ -2,6 +2,7 @@
 @import "./styles/leaderboard.css";
 @import "./styles/nav.css";
 @import "./styles/newpoll.css";
+@import "./styles/poll.css";
 
 /* Header styling */
 .app-header {

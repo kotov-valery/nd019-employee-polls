@@ -15,6 +15,7 @@ import User from "./components/User";
 import Leaderboard from "./components/Leaderboard";
 import { handleInitialData } from "./redux/actions/init";
 import { AppDispatch } from "./redux/store";
+import Poll from "./components/Poll";
 
 function Loading() {
   return <div>Loading...</div>;
@@ -62,6 +63,7 @@ function App() {
             path="/leaderboard"
             element={<Leaderboard userList={userList} />}
           />
+          <Route path="/questions/:id" element={<Poll />} />
         </Routes>
       </div>
     </Fragment>
