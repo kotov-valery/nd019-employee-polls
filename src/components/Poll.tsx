@@ -1,33 +1,97 @@
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { RootState } from "../redux/store"; // Import the RootState type
+import { RootState } from "../redux/store";
 
 function Poll() {
-  const { id } = useParams<{ id: string }>(); // Extract the 'id' parameter from the URL
+  const OPTION_ONE = 1;
+  const OPTION_TWO = 2;
+
+  const { id } = useParams<{ id: string }>();
 
   const questions = useSelector((state: RootState) => state.questions);
-  const poll = id && questions ? questions[id] : null; // Get the poll by id from the Redux store
+  const poll = id && questions ? questions[id] : null;
 
-  return (
-    <div className="poll-container">
-      <h2>Poll by {poll?.author}</h2>
-      <h3>Would you rather...</h3>
-      {poll ? (
+  const users = useSelector((state: RootState) => state.users);
+  const authedUser = useSelector((state: RootState) => state.authedUser);
+
+  const currentUser = users[authedUser];
+  const unanswered = id ? currentUser.answers[id] === undefined : false;
+
+  const onHandleVote = (option: number) => {
+    if (option === OPTION_ONE) {
+      // Dispatch action to vote for option one
+      console.log(`Voted for Option One: ${poll?.optionOne.text}`);
+    } else {
+      // Dispatch action to vote for option two
+      console.log(`Voted for Option Two: ${poll?.optionTwo.text}`);
+    }
+  };
+
+  if (poll && unanswered) {
+    return (
+      <div className="poll-container">
+        <h2>Poll by {poll?.author}</h2>
+        <h3>Would you rather...</h3>
         <div className="poll-options-container">
           <div className="poll-option">
             <div className="poll-option-text">{poll.optionOne.text}</div>
-            <button className="poll-option-button">Vote Option 1</button>
+            <button
+              className="poll-option-button"
+              onClick={() => onHandleVote(OPTION_ONE)}
+            >
+              Vote Option 1
+            </button>
           </div>
           <div className="poll-option">
             <div className="poll-option-text">{poll.optionTwo.text}</div>
-            <button className="poll-option-button">Vote Option 2</button>
+            <button
+              className="poll-option-button"
+              onClick={() => onHandleVote(OPTION_TWO)}
+            >
+              Vote Option 2
+            </button>
           </div>
         </div>
-      ) : (
+      </div>
+    );
+  } else if (id && poll && !unanswered) {
+    const isOptionOneVoted = currentUser.answers[id] === "optionOne";
+    const votedForThisOptionText = "You voted for this option";
+    return (
+      <div className="poll-container">
+        <h2>Poll by {poll?.author}</h2>
+        <h3>Would you rather...</h3>
+        <div className="poll-options-container">
+          <div className="poll-option-voted">
+            <div className="poll-option-text">{poll.optionOne.text}</div>
+            <button
+              className="poll-option-button"
+              disabled
+              hidden={!isOptionOneVoted}
+            >
+              {isOptionOneVoted ? votedForThisOptionText : "Vote Option 1"}
+            </button>
+          </div>
+          <div className="poll-option-voted">
+            <div className="poll-option-text">{poll.optionTwo.text}</div>
+            <button
+              className="poll-option-button"
+              disabled
+              hidden={isOptionOneVoted}
+            >
+              {!isOptionOneVoted ? votedForThisOptionText : "Vote Option 2"}
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  } else {
+    return (
+      <div className="poll-container">
         <p>Poll not found.</p>
-      )}
-    </div>
-  );
+      </div>
+    );
+  }
 }
 
 export default Poll;
