@@ -1,10 +1,13 @@
 import { useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { RootState } from "../redux/store";
+import { useSelector, useDispatch } from "react-redux";
+import { AppDispatch, RootState } from "../redux/store";
+import { handleVoteQuestion } from "../redux/actions/questions";
 
 function Poll() {
   const OPTION_ONE = 1;
   const OPTION_TWO = 2;
+
+  const dispatch = useDispatch<AppDispatch>();
 
   const { id } = useParams<{ id: string }>();
 
@@ -18,12 +21,13 @@ function Poll() {
   const unanswered = id ? currentUser.answers[id] === undefined : false;
 
   const onHandleVote = (option: number) => {
-    if (option === OPTION_ONE) {
-      // Dispatch action to vote for option one
-      console.log(`Voted for Option One: ${poll?.optionOne.text}`);
-    } else {
-      // Dispatch action to vote for option two
-      console.log(`Voted for Option Two: ${poll?.optionTwo.text}`);
+    if (id) {
+      dispatch(
+        handleVoteQuestion(
+          id,
+          option === OPTION_ONE ? "optionOne" : "optionTwo"
+        )
+      );
     }
   };
 

@@ -1,19 +1,16 @@
-import { createStore, applyMiddleware, compose, AnyAction } from "redux";
+import { configureStore } from "@reduxjs/toolkit";
 
 import rootReducer from "./reducers";
 import middleware from "./middleware";
-import { ThunkDispatch } from "redux-thunk";
 
-const ComposeEnhancers =
-  (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-
-const Store = createStore(
-  rootReducer,
-  ComposeEnhancers(applyMiddleware(...middleware))
-);
+const Store = configureStore({
+  reducer: rootReducer,
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(middleware),
+});
 
 export type AppStore = typeof Store;
-export type RootState = ReturnType<AppStore["getState"]>;
-export type AppDispatch = ThunkDispatch<RootState, void, AnyAction>;
+export type RootState = ReturnType<typeof Store.getState>;
+export type AppDispatch = typeof Store.dispatch;
 
 export default Store;
