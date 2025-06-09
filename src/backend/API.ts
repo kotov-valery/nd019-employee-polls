@@ -1,9 +1,4 @@
-import {
-  _getUsers,
-  _getQuestions,
-  _saveQuestion,
-  _saveQuestionAnswer,
-} from "./_DATA";
+import { _getUsers, _getQuestions, _saveQuestionAnswer } from "./_DATA";
 import { UserList, QuestionList } from "./Types";
 
 export function getInitialData(): Promise<{
@@ -19,17 +14,17 @@ export function getInitialData(): Promise<{
 }
 
 export function saveQuestionVote({
-  id,
+  qid,
   answer,
   authedUser,
 }: {
-  id: string;
+  qid: string;
   answer: string;
   authedUser: string;
 }): Promise<void> {
   return _saveQuestionAnswer({
     authedUser,
-    qid: id,
+    qid,
     answer,
   });
 }

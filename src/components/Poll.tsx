@@ -1,5 +1,7 @@
 import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+
 import { AppDispatch, RootState } from "../redux/store";
 import { handleVoteQuestion } from "../redux/actions/questions";
 
@@ -8,6 +10,7 @@ function Poll() {
   const OPTION_TWO = 2;
 
   const dispatch = useDispatch<AppDispatch>();
+  const navigate = useNavigate();
 
   const { id } = useParams<{ id: string }>();
 
@@ -21,14 +24,18 @@ function Poll() {
   const unanswered = id ? currentUser.answers[id] === undefined : false;
 
   const onHandleVote = (option: number) => {
-    if (id) {
-      dispatch(
-        handleVoteQuestion(
-          id,
-          option === OPTION_ONE ? "optionOne" : "optionTwo"
-        )
-      );
-    }
+    if (!id) return;
+
+    const uid = authedUser;
+    const qid = id;
+    dispatch(
+      handleVoteQuestion(
+        uid,
+        qid,
+        option === OPTION_ONE ? "optionOne" : "optionTwo"
+      )
+    );
+    navigate("/");
   };
 
   if (poll && unanswered) {

@@ -18,17 +18,17 @@ export default function questions(
       };
     }
     case VOTE_QUESTION: {
-      const { id, answer } = action as VoteQestionAction;
-      const question = state[id as keyof QuestionList];
+      const { uid, qid, answer } = action as VoteQestionAction;
+      const question = state[qid as keyof QuestionList];
       return {
         ...state,
-        [id]: {
+        [qid]: {
           ...question,
           optionOne: {
             ...question.optionOne,
             votes:
               answer === "optionOne"
-                ? question.optionOne.votes.concat([id])
+                ? question.optionOne.votes.concat([uid])
                 : question.optionOne.votes,
           },
           optionTwo: {
@@ -36,7 +36,7 @@ export default function questions(
             votes:
               answer === "optionTwo"
                 ? question.optionTwo.votes
-                : question.optionTwo.votes.concat([id]),
+                : question.optionTwo.votes.concat([uid]),
           },
         },
       };
@@ -45,19 +45,3 @@ export default function questions(
       return state;
   }
 }
-
-/*
-    case TOGGLE_TWEET: {
-      const { id, authedUser, hasLiked } = action as ToggleTweetAction;
-      const rootState = state as RootState;
-      return {
-        ...state,
-        [id]: {
-          ...rootState[id],
-          likes:
-            hasLiked === true
-              ? rootState[id].likes.filter((uid: string) => uid !== authedUser)
-              : rootState[id].likes.concat([authedUser]),
-        },
-      };
-*/

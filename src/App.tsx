@@ -52,12 +52,7 @@ function App() {
       </header>
       <div className="container">
         <Routes>
-          <Route
-            path="/"
-            element={
-              <Dashboard user={userList[authedUser]} questions={questions} />
-            }
-          />
+          <Route path="/" element={<Dashboard />} />
           <Route path="/new" element={<NewPoll />} />
           <Route
             path="/leaderboard"

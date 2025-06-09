@@ -1,16 +1,11 @@
-import type { User, QuestionList } from "../../backend/Types";
+import { useSelector } from "react-redux";
 import DashboardList from "./DashboardList";
+import { RootState } from "../../redux/reducers";
 
-function Dashboard({
-  user,
-  questions,
-}: {
-  user: User;
-  questions: QuestionList | null;
-}) {
-  if (!user || !questions) {
-    return <div>Loading...</div>;
-  }
+function Dashboard() {
+  const questions = useSelector((state: RootState) => state.questions);
+  const authedUser = useSelector((state: RootState) => state.authedUser);
+  const user = useSelector((state: RootState) => state.users[authedUser]);
 
   const answeredQuestions = Object.keys(user.answers).map(
     (id) => questions[id]
