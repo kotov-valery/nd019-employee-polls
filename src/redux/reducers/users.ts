@@ -1,14 +1,19 @@
-import type { User, UserList } from "../../backend/Types";
+import type { UserList } from "../../backend/Types";
 import {
   RECEIVE_USERS,
   USER_ANSWER_QUESTION,
   ReceiveUsersAction,
   UserAnswerQuestionAction,
+  USER_ADDED_QUESTION,
+  UserAddedQuestionAction,
 } from "../actions/users";
 
 export default function users(
   state: UserList = {},
-  action: ReceiveUsersAction | UserAnswerQuestionAction
+  action:
+    | ReceiveUsersAction
+    | UserAnswerQuestionAction
+    | UserAddedQuestionAction
 ): UserList {
   switch (action.type) {
     case RECEIVE_USERS: {
@@ -29,6 +34,16 @@ export default function users(
             ...answers,
             [qid]: answer,
           },
+        },
+      };
+    }
+    case USER_ADDED_QUESTION: {
+      const { uid, qid } = action as UserAnswerQuestionAction;
+      return {
+        ...state,
+        [uid]: {
+          ...state[uid],
+          questions: state[uid].questions.concat([qid]),
         },
       };
     }

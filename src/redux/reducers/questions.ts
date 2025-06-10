@@ -2,12 +2,17 @@ import type { QuestionList } from "../../backend/Types";
 import type {
   ReceiveQuestionsAction,
   VoteQestionAction,
+  AddNewQuestionAction,
 } from "../actions/questions";
-import { RECEIVE_QUESTOINS, VOTE_QUESTION } from "../actions/questions";
+import {
+  ADD_NEW_QUESTION,
+  RECEIVE_QUESTOINS,
+  VOTE_QUESTION,
+} from "../actions/questions";
 
 export default function questions(
   state: QuestionList = {},
-  action: ReceiveQuestionsAction | VoteQestionAction
+  action: ReceiveQuestionsAction | VoteQestionAction | AddNewQuestionAction
 ): QuestionList {
   switch (action.type) {
     case RECEIVE_QUESTOINS: {
@@ -38,6 +43,15 @@ export default function questions(
                 ? question.optionTwo.votes
                 : question.optionTwo.votes.concat([uid]),
           },
+        },
+      };
+    }
+    case ADD_NEW_QUESTION: {
+      const { question } = action as AddNewQuestionAction;
+      return {
+        ...state,
+        [question.id]: {
+          ...question,
         },
       };
     }
