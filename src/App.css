@@ -3,6 +3,7 @@
 @import "./styles/nav.css";
 @import "./styles/newpoll.css";
 @import "./styles/poll.css";
+@import "./styles/login.css";
 
 /* Header styling */
 .app-header {

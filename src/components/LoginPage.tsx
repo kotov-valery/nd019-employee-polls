@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 import { setAuthedUser } from "../redux/actions/authedUser";
+import loginLogo from "../assets/loginpage-logo.png";
 
 function LoginPage({ userList }: { userList: any }) {
   const [selectedUser, setSelectedUser] = useState("");
@@ -20,10 +21,12 @@ function LoginPage({ userList }: { userList: any }) {
   };
 
   return (
-    <div>
-      <h1>Login Page</h1>
+    <div className="login-page-container">
+      <h1>Employee Poll</h1>
+      <img className="login-logo" src={loginLogo} alt="Login Logo" />
       <p>Select user to log in</p>
       <select
+        className="login-select"
         value={selectedUser}
         onChange={(e) => setSelectedUser(e.target.value)}
       >
@@ -36,7 +39,11 @@ function LoginPage({ userList }: { userList: any }) {
           </option>
         ))}
       </select>
-      <button onClick={handleLogin} disabled={!selectedUser}>
+      <button
+        className="login-button"
+        onClick={handleLogin}
+        disabled={!selectedUser}
+      >
         Login
       </button>
     </div>

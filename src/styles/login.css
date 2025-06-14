@@ -1,0 +1,57 @@
+/* Styling for the login page container */
+.login-page-container {
+  display: flex; /* Use Flexbox for layout */
+  flex-direction: column; /* Stack items vertically */
+  align-items: center; /* Center items horizontally */
+  justify-content: center; /* Center items vertically */
+  height: 100vh; /* Full viewport height */
+  background-color: #f8f9fa; /* Light background color */
+  padding: 20px; /* Add padding around the container */
+}
+
+/* Styling for the logo */
+.login-logo {
+  width: 150px; /* Set a fixed width for the logo */
+  margin-bottom: 20px; /* Add space below the logo */
+}
+
+/* Styling for the heading */
+.login-page-container h1 {
+  font-size: 24px; /* Larger font size for emphasis */
+  color: #333; /* Dark gray color */
+  margin-bottom: 10px; /* Space below the heading */
+}
+
+/* Styling for the select dropdown */
+.login-select {
+  width: 200px; /* Set a fixed width for the dropdown */
+  padding: 10px; /* Add padding inside the dropdown */
+  font-size: 14px; /* Set a readable font size */
+  border: 1px solid #ddd; /* Light border */
+  border-radius: 5px; /* Rounded corners */
+  margin-bottom: 20px; /* Space below the dropdown */
+  background-color: #ffffff; /* White background */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+/* Styling for the login button */
+.login-button {
+  padding: 10px 20px; /* Add padding for a comfortable size */
+  font-size: 14px; /* Set a readable font size */
+  font-weight: bold; /* Make the text bold */
+  color: #ffffff; /* White text color */
+  background-color: #007bff; /* Blue background */
+  border: none; /* Remove default border */
+  border-radius: 5px; /* Rounded corners */
+  cursor: pointer; /* Change cursor to pointer on hover */
+  transition: background-color 0.2s ease; /* Smooth hover effect */
+}
+
+.login-button:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+}
+
+.login-button:disabled {
+  background-color: #cccccc; /* Gray background for disabled state */
+  cursor: not-allowed; /* Show disabled cursor */
+}
