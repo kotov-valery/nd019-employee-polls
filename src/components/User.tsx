@@ -1,7 +1,12 @@
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "../redux/store";
+import { logoutUser } from "../redux/actions/authedUser";
+
 function User({ authedUser }: { authedUser: string | null }) {
+  const dispatch = useDispatch<AppDispatch>();
+
   const onHandleLogout = () => {
-    // Handle logout logic here
-    console.log("User logged out");
+    dispatch(logoutUser());
   };
 
   if (!authedUser) {
