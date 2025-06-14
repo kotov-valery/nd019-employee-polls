@@ -5,9 +5,11 @@ function Leaderboard({ userList }: { userList: UserList | null }) {
     return <div>Loading...</div>;
   }
 
-  const sortedUsers = Object.values(userList).sort(
-    (a, b) => Object.keys(b.answers).length - Object.keys(a.answers).length
-  );
+  const sortedUsers = Object.values(userList).sort((a, b) => {
+    const aScore = Object.keys(a.answers).length + a.questions.length;
+    const bScore = Object.keys(b.answers).length + b.questions.length;
+    return bScore - aScore;
+  });
 
   return (
     <div className="leaderboard">
