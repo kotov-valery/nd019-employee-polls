@@ -14,8 +14,36 @@ nav a:hover {
   text-decoration: underline;
 }
 
+/* User info container styling */
+.user-info-container {
+  display: flex; /* Use Flexbox for horizontal alignment */
+  align-items: center; /* Vertically center items */
+  gap: 10px; /* Add spacing between the username and the button */
+}
+
 /* User styling */
 .user-info {
   font-size: 14px;
   color: #333;
+}
+
+/* Styling for the logout button */
+.logout-button {
+  padding: 5px 10px; /* Reduce padding for a smaller size */
+  font-size: 12px; /* Smaller font size */
+  font-weight: bold; /* Keep the text bold */
+  color: #ffffff; /* White text color */
+  background-color: #007bff; /* Blue background */
+  border: none; /* Remove default border */
+  border-radius: 3px; /* Slightly rounded corners */
+  cursor: pointer; /* Change cursor to pointer on hover */
+  transition: background-color 0.2s ease; /* Smooth hover effect */
+}
+
+.logout-button:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+}
+
+.logout-button:active {
+  background-color: #004494; /* Even darker blue when clicked */
 }
