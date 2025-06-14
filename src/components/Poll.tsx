@@ -1,6 +1,5 @@
 import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
 
 import { AppDispatch, RootState } from "../redux/store";
 import { handleVoteQuestion } from "../redux/actions/questions";
@@ -10,7 +9,6 @@ function Poll() {
   const OPTION_TWO = 2;
 
   const dispatch = useDispatch<AppDispatch>();
-  const navigate = useNavigate();
 
   const { id } = useParams<{ id: string }>();
 
@@ -22,6 +20,12 @@ function Poll() {
 
   const currentUser = users[authedUser];
   const unanswered = id ? currentUser.answers[id] === undefined : false;
+
+  const totalAnswers = poll
+    ? poll.optionOne.votes.length + poll.optionTwo.votes.length
+    : 0;
+  const optionOneVotes = poll ? poll.optionOne.votes.length : 0;
+  const optionTwoVotes = poll ? poll.optionTwo.votes.length : 0;
 
   const onHandleVote = (option: number) => {
     if (!id) return;
@@ -35,7 +39,6 @@ function Poll() {
         option === OPTION_ONE ? "optionOne" : "optionTwo"
       )
     );
-    navigate("/");
   };
 
   if (poll && unanswered) {
@@ -67,31 +70,34 @@ function Poll() {
     );
   } else if (id && poll && !unanswered) {
     const isOptionOneVoted = currentUser.answers[id] === "optionOne";
-    const votedForThisOptionText = "You voted for this option";
     return (
       <div className="poll-container">
         <h2>Poll by {poll?.author}</h2>
         <h3>Would you rather...</h3>
         <div className="poll-options-container">
-          <div className="poll-option-voted">
+          <div
+            className={
+              "poll-option-voted " +
+              (isOptionOneVoted ? "user-selected-option" : "")
+            }
+          >
             <div className="poll-option-text">{poll.optionOne.text}</div>
-            <button
-              className="poll-option-button"
-              disabled
-              hidden={!isOptionOneVoted}
-            >
-              {isOptionOneVoted ? votedForThisOptionText : "Vote Option 1"}
-            </button>
+            <div className="poll-option-results">
+              {((optionOneVotes / totalAnswers) * 100).toFixed(2)}% voted for
+              this option, namely {optionOneVotes} people
+            </div>
           </div>
-          <div className="poll-option-voted">
+          <div
+            className={
+              "poll-option-voted " +
+              (!isOptionOneVoted ? "user-selected-option" : "")
+            }
+          >
             <div className="poll-option-text">{poll.optionTwo.text}</div>
-            <button
-              className="poll-option-button"
-              disabled
-              hidden={isOptionOneVoted}
-            >
-              {!isOptionOneVoted ? votedForThisOptionText : "Vote Option 2"}
-            </button>
+            <div className="poll-option-results">
+              {((optionTwoVotes / totalAnswers) * 100).toFixed(2)}% voted for
+              this option, namely {optionTwoVotes} people
+            </div>
           </div>
         </div>
       </div>
