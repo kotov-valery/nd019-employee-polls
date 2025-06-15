@@ -12,7 +12,7 @@ import Dashboard from "./components/dashboard/Dashboard";
 import Nav from "./components/Nav";
 import NewPoll from "./components/NewPoll";
 import User from "./components/User";
-import Leaderboard from "./components/Leaderboard";
+import Leaderboard from "./components/Leaderboard/Leaderboard";
 import { handleInitialData } from "./redux/actions/init";
 import { AppDispatch } from "./redux/store";
 import Poll from "./components/Poll/Poll";

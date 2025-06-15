@@ -1,4 +1,5 @@
-import { UserList } from "../backend/Types";
+import { UserList } from "../../backend/Types";
+import LeaderboardEntry from "./LeaderboardEntry";
 
 function Leaderboard({ userList }: { userList: UserList | null }) {
   if (!userList) {
@@ -25,12 +26,7 @@ function Leaderboard({ userList }: { userList: UserList | null }) {
         </thead>
         <tbody>
           {sortedUsers.map((user, index) => (
-            <tr key={user.id}>
-              <td>{index + 1}</td>
-              <td>{user.name}</td>
-              <td>{Object.keys(user.answers).length}</td>
-              <td>{user.questions.length}</td>
-            </tr>
+            <LeaderboardEntry key={user.id} user={user} index={index} />
           ))}
         </tbody>
       </table>

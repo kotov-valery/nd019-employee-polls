@@ -47,6 +47,39 @@
   color: #333;
 }
 
+/* Styling for leaderboard user entry */
+.leaderboard-user-entry {
+  display: flex; /* Use Flexbox for horizontal alignment */
+  align-items: center; /* Vertically center items */
+  gap: 10px; /* Add spacing between the avatar and text */
+}
+
+/* Styling for leaderboard user avatar */
+.leaderboard-user-avatar {
+  width: 30px; /* Small fixed width for the avatar */
+  height: 30px; /* Small fixed height for the avatar */
+  border-radius: 50%; /* Make the avatar circular */
+}
+
+/* Styling for leaderboard user text container */
+.leaderboard-user-text {
+  display: flex; /* Use Flexbox for vertical alignment */
+  flex-direction: column; /* Stack username and user ID vertically */
+}
+
+/* Styling for leaderboard username */
+.leaderboard-user-name {
+  font-size: 14px; /* Slightly larger font size for the username */
+  font-weight: bold; /* Make the username bold */
+  color: #333; /* Dark gray color for emphasis */
+}
+
+/* Styling for leaderboard user ID */
+.leaderboard-user-id {
+  font-size: 10px; /* Smaller font size for the user ID */
+  color: #666; /* Light gray color for subtle emphasis */
+}
+
 /* Responsive table */
 @media (max-width: 600px) {
   .leaderboard-table th,
