@@ -1,6 +1,7 @@
 export type User = {
   id: string;
   name: string;
+  avatarURL: string;
   answers: {
     [key: string]: string;
   };

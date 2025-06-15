@@ -11,10 +11,16 @@ export function getInitialData(): Promise<{
   questions: QuestionList;
 }> {
   return Promise.all([_getUsers(), _getQuestions()]).then(
-    ([users, questions]) => ({
-      users,
-      questions,
-    })
+    ([users, questions]) => {
+      // Use predefined avatar URLs for users
+      Object.keys(users).forEach((user) => {
+        users[user].avatarURL = `/avatars/${users[user].id}.png`;
+      });
+      return {
+        users,
+        questions,
+      };
+    }
   );
 }
 

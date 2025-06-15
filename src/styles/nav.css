@@ -23,8 +23,33 @@ nav a:hover {
 
 /* User styling */
 .user-info {
-  font-size: 14px;
+  display: flex; /* Use Flexbox for horizontal alignment */
+  flex-direction: column; /* Stack "Logged in as" and username vertically */
+  font-size: 12px;
   color: #333;
+  line-height: 1.2; /* Adjust line height for better spacing */
+}
+
+/* Styling for "Logged in as" label */
+.user-info .logged-in-label {
+  font-size: 10px; /* Smaller font size for the label */
+  color: #666; /* Light gray color for subtle emphasis */
+  margin-bottom: 2px; /* Add a small space below the label */
+}
+
+/* Styling for username */
+.user-info .username {
+  font-size: 12px; /* Slightly smaller font size for the username */
+  font-weight: bold; /* Make the username bold */
+  margin-left: 5px; /* Shift the username slightly to the right */
+}
+
+/* Styling for user avatar */
+.user-avatar {
+  width: 40px; /* Set a fixed width */
+  height: 40px; /* Set a fixed height */
+  border-radius: 50%; /* Make the avatar circular */
+  margin-right: 10px; /* Add space to the right of the avatar */
 }
 
 /* Styling for the logout button */

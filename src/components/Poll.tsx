@@ -27,6 +27,9 @@ function Poll() {
   const optionOneVotes = poll ? poll.optionOne.votes.length : 0;
   const optionTwoVotes = poll ? poll.optionTwo.votes.length : 0;
 
+  const pollAuthor = poll ? users[poll.author] : null;
+  const pollAuthorAvatar = pollAuthor ? pollAuthor.avatarURL : "";
+
   const onHandleVote = (option: number) => {
     if (!id) return;
 
@@ -45,6 +48,11 @@ function Poll() {
     return (
       <div className="poll-container">
         <h2>Poll by {poll?.author}</h2>
+        <img
+          className="poll-author-avatar"
+          src={pollAuthorAvatar}
+          alt="User Avatar"
+        />
         <h3>Would you rather...</h3>
         <div className="poll-options-container">
           <div className="poll-option">
@@ -73,6 +81,11 @@ function Poll() {
     return (
       <div className="poll-container">
         <h2>Poll by {poll?.author}</h2>
+        <img
+          className="poll-author-avatar"
+          src={pollAuthorAvatar}
+          alt="User Avatar"
+        />
         <h3>Would you rather...</h3>
         <div className="poll-options-container">
           <div

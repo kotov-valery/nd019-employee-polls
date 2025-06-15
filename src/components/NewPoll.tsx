@@ -3,7 +3,8 @@ import { useDispatch } from "react-redux";
 import { useState } from "react";
 
 import { handleNewQuestion } from "../redux/actions/questions";
-import { AppDispatch } from "../redux/store";
+import { AppDispatch, RootState } from "../redux/store";
+import { useSelector } from "react-redux";
 
 function NewPoll() {
   const navigate = useNavigate();
@@ -11,6 +12,10 @@ function NewPoll() {
 
   const [optionOne, setOptionOne] = useState("");
   const [optionTwo, setOptionTwo] = useState("");
+
+  const currentUser = useSelector((state: RootState) => state.authedUser);
+  const users = useSelector((state: RootState) => state.users);
+  const avatarURL = users[currentUser]?.avatarURL;
 
   const onChangeOptionOne = (e: React.ChangeEvent<HTMLInputElement>) => {
     setOptionOne(e.target.value);
@@ -28,6 +33,11 @@ function NewPoll() {
   return (
     <div className="new-poll">
       <h1>Would You Rather</h1>
+      <img
+        className="new-poll-author-avatar"
+        src={avatarURL}
+        alt="User Avatar"
+      />
       <h2>Create Your Own Poll</h2>
       <form className="new-poll-form" onSubmit={onHandleSubmit}>
         <label className="new-poll-label">Option 1</label>
