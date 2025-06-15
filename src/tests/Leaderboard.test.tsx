@@ -1,5 +1,6 @@
 import { render } from "@testing-library/react";
 import Leaderboard from "../components/Leaderboard/Leaderboard";
+import LeaderboardEntry from "../components/Leaderboard/LeaderboardEntry";
 
 test("Leaderboard snapshot", () => {
   const users = {
