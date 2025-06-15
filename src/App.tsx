@@ -15,7 +15,7 @@ import User from "./components/User";
 import Leaderboard from "./components/Leaderboard";
 import { handleInitialData } from "./redux/actions/init";
 import { AppDispatch } from "./redux/store";
-import Poll from "./components/Poll";
+import Poll from "./components/Poll/Poll";
 
 function Loading() {
   return <div>Loading...</div>;
