@@ -1,0 +1,107 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Leaderboard snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="leaderboard"
+  >
+    <h1>
+      Leaderboard
+    </h1>
+    <table
+      class="leaderboard-table"
+    >
+      <thead>
+        <tr>
+          <th>
+            Rank
+          </th>
+          <th>
+            User
+          </th>
+          <th>
+            Answers
+          </th>
+          <th>
+            Questions
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            1
+          </td>
+          <td>
+            <div
+              class="leaderboard-user-entry"
+            >
+              <img
+                alt="Mike Tsamis's avatar"
+                class="leaderboard-user-avatar"
+                src="/avatars/mtsamis.png"
+              />
+              <div
+                class="leaderboard-user-text"
+              >
+                <span
+                  class="leaderboard-user-id"
+                >
+                  mtsamis
+                </span>
+                <span
+                  class="leaderboard-user-name"
+                >
+                  Mike Tsamis
+                </span>
+              </div>
+            </div>
+          </td>
+          <td>
+            2
+          </td>
+          <td>
+            2
+          </td>
+        </tr>
+        <tr>
+          <td>
+            2
+          </td>
+          <td>
+            <div
+              class="leaderboard-user-entry"
+            >
+              <img
+                alt="John Doe's avatar"
+                class="leaderboard-user-avatar"
+                src="/avatars/johndoe.png"
+              />
+              <div
+                class="leaderboard-user-text"
+              >
+                <span
+                  class="leaderboard-user-id"
+                >
+                  johndoe
+                </span>
+                <span
+                  class="leaderboard-user-name"
+                >
+                  John Doe
+                </span>
+              </div>
+            </div>
+          </td>
+          <td>
+            1
+          </td>
+          <td>
+            1
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</DocumentFragment>
+`;
