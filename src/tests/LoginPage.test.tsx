@@ -6,6 +6,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import LoginPage from "../components/LoginPage";
 import authedUserReducer from "../redux/reducers/authedUser";
 import usersReducer from "../redux/reducers/users";
+import { UserList } from "../backend/Types";
 
 test("LoginPage dropdown selection and button click", () => {
   const userList = {
@@ -13,7 +14,7 @@ test("LoginPage dropdown selection and button click", () => {
       id: "mtsamis",
       password: "xyz123",
       name: "Mike Tsamis",
-      avatarURL: null,
+      avatarURL: "",
       answers: {},
       questions: [],
     },
@@ -21,11 +22,11 @@ test("LoginPage dropdown selection and button click", () => {
       id: "johndoe",
       password: "abc456",
       name: "John Doe",
-      avatarURL: null,
+      avatarURL: "",
       answers: {},
       questions: [],
     },
-  };
+  } as UserList;
 
   // Create a mock Redux store
   const store = configureStore({
