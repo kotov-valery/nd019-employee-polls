@@ -17,16 +17,15 @@ nav a:hover {
 /* User info container styling */
 .user-info-container {
   display: flex; /* Use Flexbox for horizontal alignment */
-  align-items: center; /* Vertically center items */
-  gap: 10px; /* Add spacing between the username and the button */
+  align-items: center; /* Vertically align items to the center of the avatar */
+  gap: 10px; /* Add spacing between the avatar and the text/button */
 }
 
 /* User styling */
 .user-info {
-  display: flex; /* Use Flexbox for horizontal alignment */
+  display: flex; /* Use Flexbox for vertical alignment */
   flex-direction: column; /* Stack "Logged in as" and username vertically */
-  font-size: 12px;
-  color: #333;
+  font-size: 12px; /* Smaller font size for the container */
   line-height: 1.2; /* Adjust line height for better spacing */
 }
 
@@ -49,7 +48,6 @@ nav a:hover {
   width: 40px; /* Set a fixed width */
   height: 40px; /* Set a fixed height */
   border-radius: 50%; /* Make the avatar circular */
-  margin-right: 10px; /* Add space to the right of the avatar */
 }
 
 /* Styling for the logout button */
@@ -63,6 +61,7 @@ nav a:hover {
   border-radius: 3px; /* Slightly rounded corners */
   cursor: pointer; /* Change cursor to pointer on hover */
   transition: background-color 0.2s ease; /* Smooth hover effect */
+  align-self: center; /* Align the button vertically in the middle of the avatar */
 }
 
 .logout-button:hover {
