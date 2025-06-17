@@ -7,13 +7,14 @@ function Dashboard() {
   const authedUser = useSelector((state: RootState) => state.authedUser);
   const user = useSelector((state: RootState) => state.users[authedUser]);
 
-  const answeredQuestions = Object.keys(user.answers).map(
-    (id) => questions[id]
-  );
+  const answeredQuestions = Object.keys(user.answers)
+    .map((id) => questions[id])
+    .sort((a, b) => b.timestamp - a.timestamp);
 
   const unansweredQuestions = Object.keys(questions)
     .filter((id) => !user.answers[id])
-    .map((id) => questions[id]);
+    .map((id) => questions[id])
+    .sort((a, b) => b.timestamp - a.timestamp);
 
   return (
     <div className="dashboard">
