@@ -16,6 +16,7 @@ import Leaderboard from "./components/Leaderboard/Leaderboard";
 import { handleInitialData } from "./redux/actions/init";
 import { AppDispatch } from "./redux/store";
 import Poll from "./components/Poll/Poll";
+import NotFound from "./components/NotFound";
 
 function Loading() {
   return <div>Loading...</div>;
@@ -25,12 +26,9 @@ function App() {
   const dispatch: AppDispatch = useDispatch();
 
   const userList = useSelector((state: any) => state.users);
-  const questions = useSelector((state: any) => state.questions);
 
   const authedUser = useSelector((state: any) => state.authedUser);
   const isLoading = useSelector((state: any) => state.loading);
-
-  const userName = userList !== null ? userList[authedUser]?.name : "";
 
   useEffect(() => {
     dispatch(handleInitialData());
@@ -40,27 +38,33 @@ function App() {
     return <Loading />;
   }
 
-  if (!authedUser) {
-    return <LoginPage userList={userList} />;
-  }
+  console.log("Logged in user:", authedUser);
 
   return (
     <Fragment>
-      <header className="app-header">
-        <Nav />
-        <User authedUser={authedUser} />
-      </header>
-      <div className="container">
-        <Routes>
-          <Route path="/" element={<Dashboard />} />
-          <Route path="/new" element={<NewPoll />} />
-          <Route
-            path="/leaderboard"
-            element={<Leaderboard userList={userList} />}
-          />
-          <Route path="/questions/:id" element={<Poll />} />
-        </Routes>
-      </div>
+      {authedUser ? (
+        <>
+          <header className="app-header">
+            <Nav />
+            <User authedUser={authedUser} />
+          </header>
+          <div className="container">
+            <Routes>
+              <Route path="/" element={<Dashboard />} />
+              <Route path="/new" element={<NewPoll />} />
+              <Route
+                path="/leaderboard"
+                element={<Leaderboard userList={userList} />}
+              />
+              <Route path="/questions/:id" element={<Poll />} />
+              <Route path="/404" element={<NotFound />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </div>
+        </>
+      ) : (
+        <LoginPage userList={userList} />
+      )}
     </Fragment>
   );
 }
