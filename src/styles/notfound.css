@@ -8,6 +8,13 @@
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
+.not-found-image {
+  width: 250px; /* Set a fixed width */
+  height: 250px; /* Set a fixed height */
+  border-radius: 50%; /* Make the avatar circular */
+  margin-bottom: 10px; /* Add space below the avatar */
+}
+
 .not-found-container h1 {
   font-size: 36px;
   color: #333;
