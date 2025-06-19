@@ -6,9 +6,15 @@ import { useState } from "react";
 function Dashboard() {
   const [activeTab, setActiveTab] = useState("unanswered");
 
-  const questions = useSelector((state: RootState) => state.questions);
   const authedUser = useSelector((state: RootState) => state.authedUser);
-  const user = useSelector((state: RootState) => state.users[authedUser]);
+  const user = useSelector((state: RootState) =>
+    authedUser ? state.users[authedUser] : null
+  );
+  const questions = useSelector((state: RootState) => state.questions);
+
+  if (!user) {
+    return <div>Please log in to view the dashboard.</div>;
+  }
 
   const answeredQuestions = Object.keys(user.answers)
     .map((id) => questions[id])

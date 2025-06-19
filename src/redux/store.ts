@@ -1,5 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { persistStore, persistReducer } from "redux-persist";
+import { Reducer } from "redux";
+
 import storage from "redux-persist/lib/storage"; // Use local storage
 import rootReducer from "./reducers";
 import middleware from "./middleware";
@@ -11,7 +13,10 @@ const persistConfig = {
 };
 
 // Cast the rootReducer to match the expected type for redux-persist
-const persistedReducer = persistReducer<any>(persistConfig, rootReducer);
+const persistedReducer = persistReducer<any>(
+  persistConfig,
+  rootReducer as Reducer<any, any>
+);
 
 const Store = configureStore({
   reducer: persistedReducer,

@@ -1,8 +1,12 @@
 import { LOGOUT_USER, SET_AUTHED_USER } from "../actions/types";
 
-const initialState = null;
+type AuthedUserAction =
+  | { type: typeof SET_AUTHED_USER; userId: string }
+  | { type: typeof LOGOUT_USER };
 
-const authedUserReducer = (state = initialState, action: any) => {
+const initialState: string | null = null;
+
+const authedUserReducer = (state = initialState, action: AuthedUserAction) => {
   switch (action.type) {
     case SET_AUTHED_USER:
       return action.userId;
