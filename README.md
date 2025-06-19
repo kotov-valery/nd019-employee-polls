@@ -23,10 +23,10 @@ The Employee Polls application is a React-based web app that allows users to cre
 ![Dashboard](doc/assets/dashboard.png)
 
 #### Unanswered Poll
-![Unanswered Poll](doc/assets/unanswered_poll.png)
+![Unanswered Poll](doc/assets/not-finished-poll.png)
 
 #### Completed Poll
-![Completed Poll](doc/assets/completed_poll.png)
+![Completed Poll](doc/assets/finished-poll.png)
 
 ### Technologies Used
 
