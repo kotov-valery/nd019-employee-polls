@@ -40,8 +40,8 @@ export default function questions(
             ...question.optionTwo,
             votes:
               answer === "optionTwo"
-                ? question.optionTwo.votes
-                : question.optionTwo.votes.concat([uid]),
+                ? question.optionTwo.votes.concat([uid])
+                : question.optionTwo.votes,
           },
         },
       };
