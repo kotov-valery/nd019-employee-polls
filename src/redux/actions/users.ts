@@ -1,8 +1,9 @@
 import type { UserList } from "../../backend/Types";
-
-export const RECEIVE_USERS = "RECEIVE_USERS";
-export const USER_ANSWER_QUESTION = "USER_ANSWER_QUESTION";
-export const USER_ADDED_QUESTION = "USER_ADDED_QUESTION";
+import {
+  RECEIVE_USERS,
+  USER_ANSWER_QUESTION,
+  USER_ADDED_QUESTION,
+} from "./types";
 
 export type ReceiveUsersAction = {
   type: string;

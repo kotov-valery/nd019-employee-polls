@@ -8,7 +8,7 @@ import {
   ADD_NEW_QUESTION,
   RECEIVE_QUESTOINS,
   VOTE_QUESTION,
-} from "../actions/questions";
+} from "../actions/types";
 
 export default function questions(
   state: QuestionList = {},

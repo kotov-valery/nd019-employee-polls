@@ -2,9 +2,11 @@ import type { UserList } from "../../backend/Types";
 import {
   RECEIVE_USERS,
   USER_ANSWER_QUESTION,
+  USER_ADDED_QUESTION,
+} from "../actions/types";
+import {
   ReceiveUsersAction,
   UserAnswerQuestionAction,
-  USER_ADDED_QUESTION,
   UserAddedQuestionAction,
 } from "../actions/users";
 

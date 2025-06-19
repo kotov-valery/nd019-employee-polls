@@ -1,5 +1,4 @@
-export const SET_AUTHED_USER = "SET_AUTHED_USER";
-export const LOGOUT_USER = "LOGOUT_USER";
+import { SET_AUTHED_USER, LOGOUT_USER } from "./types";
 
 export const setAuthedUser = (userId: string) => ({
   type: SET_AUTHED_USER,

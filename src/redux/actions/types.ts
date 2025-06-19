@@ -1,0 +1,13 @@
+// Authentication
+export const SET_AUTHED_USER = "SET_AUTHED_USER";
+export const LOGOUT_USER = "LOGOUT_USER";
+
+// Users
+export const RECEIVE_USERS = "RECEIVE_USERS";
+export const USER_ANSWER_QUESTION = "USER_ANSWER_QUESTION";
+export const USER_ADDED_QUESTION = "USER_ADDED_QUESTION";
+
+// Questions
+export const RECEIVE_QUESTOINS = "RECEIVE_QUESTIONS";
+export const VOTE_QUESTION = "VOTE_QUESTION";
+export const ADD_NEW_QUESTION = "ADD_NEW_QUESTION";

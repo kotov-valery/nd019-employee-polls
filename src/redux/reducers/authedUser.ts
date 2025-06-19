@@ -1,4 +1,4 @@
-import { LOGOUT_USER, SET_AUTHED_USER } from "../actions/authedUser";
+import { LOGOUT_USER, SET_AUTHED_USER } from "../actions/types";
 
 const initialState = null;
 

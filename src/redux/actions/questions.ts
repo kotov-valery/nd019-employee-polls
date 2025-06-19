@@ -1,10 +1,7 @@
+import { RECEIVE_QUESTOINS, VOTE_QUESTION, ADD_NEW_QUESTION } from "./types";
 import { saveNewQuestion, saveQuestionVote } from "../../backend/API";
 import type { Question, QuestionList } from "../../backend/Types";
 import { userAddedQuestion, userAnswerQuestion } from "./users";
-
-export const RECEIVE_QUESTOINS = "RECEIVE_QUESTIONS";
-export const VOTE_QUESTION = "VOTE_QUESTION";
-export const ADD_NEW_QUESTION = "ADD_NEW_QUESTION";
 
 export type ReceiveQuestionsAction = {
   type: string;
