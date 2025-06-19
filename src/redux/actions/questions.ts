@@ -11,7 +11,7 @@ export type ReceiveQuestionsAction = {
   questions: QuestionList;
 };
 
-export type VoteQestionAction = {
+export type VoteQuestionAction = {
   type: string;
   uid: string;
   qid: string;
@@ -36,7 +36,7 @@ export function voteQuestion(
   uid: string,
   qid: string,
   answer: string
-): VoteQestionAction {
+): VoteQuestionAction {
   return {
     type: VOTE_QUESTION,
     uid,

@@ -1,7 +1,7 @@
 import type { QuestionList } from "../../backend/Types";
 import type {
   ReceiveQuestionsAction,
-  VoteQestionAction,
+  VoteQuestionAction,
   AddNewQuestionAction,
 } from "../actions/questions";
 import {
@@ -12,7 +12,7 @@ import {
 
 export default function questions(
   state: QuestionList = {},
-  action: ReceiveQuestionsAction | VoteQestionAction | AddNewQuestionAction
+  action: ReceiveQuestionsAction | VoteQuestionAction | AddNewQuestionAction
 ): QuestionList {
   switch (action.type) {
     case RECEIVE_QUESTOINS: {
@@ -23,7 +23,7 @@ export default function questions(
       };
     }
     case VOTE_QUESTION: {
-      const { uid, qid, answer } = action as VoteQestionAction;
+      const { uid, qid, answer } = action as VoteQuestionAction;
       const question = state[qid as keyof QuestionList];
       return {
         ...state,
