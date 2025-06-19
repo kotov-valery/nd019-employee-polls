@@ -38,8 +38,6 @@ function App() {
     return <Loading />;
   }
 
-  console.log("Logged in user:", authedUser);
-
   return (
     <Fragment>
       {authedUser ? (

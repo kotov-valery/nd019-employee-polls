@@ -58,7 +58,13 @@ function NewPoll() {
           onChange={onChangeOptionTwo}
         />
 
-        <button className="new-poll-submit" type="submit">
+        <button
+          className="new-poll-submit"
+          type="submit"
+          disabled={
+            optionOne.trim().length === 0 || optionTwo.trim().length === 0
+          }
+        >
           Submit
         </button>
       </form>
