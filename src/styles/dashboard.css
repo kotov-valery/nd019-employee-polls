@@ -15,25 +15,40 @@
   color: #333;
 }
 
-
-/* Dashboard cards container */
-.dashboard-cards {
+/* Dashboard tabs container */
+.dashboard-tabs {
   display: flex;
-  gap: 20px; /* Space between the cards */
-  padding: 10px;
-  flex-wrap: wrap; /* Allow wrapping on smaller screens */
-  justify-content: space-between; /* Distribute cards evenly */
+  justify-content: center;
+  margin-bottom: 20px;
+  gap: 10px; /* Space between tabs */
 }
 
-/* Individual card styling */
-.dashboard-card {
-  flex: 1 1 calc(50% - 20px); /* Take up 50% of the width minus the gap */
-  background-color: #f9f9f9; /* Light gray background */
-  padding: 20px;
-  margin: 10px;
-  border-radius: 8px; /* Rounded corners */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-  transition: transform 0.2s ease, box-shadow 0.2s ease; /* Hover effect */
+/* Individual tab styling */
+.dashboard-tab {
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: bold;
+  color: #007bff; /* Blue text color */
+  background-color: #ffffff; /* White background */
+  border: 1px solid #ddd; /* Light border */
+  border-radius: 5px; /* Rounded corners */
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.dashboard-tab:hover {
+  background-color: #f1f1f1; /* Light gray background on hover */
+}
+
+.dashboard-tab.active {
+  background-color: #007bff; /* Blue background for active tab */
+  color: #ffffff; /* White text color for active tab */
+  border-color: #0056b3; /* Darker blue border for active tab */
+}
+
+/* Dashboard content container */
+.dashboard-content {
+  margin-top: 20px;
 }
 
 /* Question list title */
