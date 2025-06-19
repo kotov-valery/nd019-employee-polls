@@ -51,7 +51,7 @@ function App() {
           <div className="container">
             <Routes>
               <Route path="/" element={<Dashboard />} />
-              <Route path="/new" element={<NewPoll />} />
+              <Route path="/add" element={<NewPoll />} />
               <Route
                 path="/leaderboard"
                 element={<Leaderboard userList={userList} />}
