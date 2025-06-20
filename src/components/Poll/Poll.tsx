@@ -1,5 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
+import { Navigate } from "react-router-dom";
 
 import { AppDispatch, RootState } from "../../redux/store";
 import { handleVoteQuestion } from "../../redux/actions/questions";
@@ -20,7 +21,8 @@ function Poll() {
   const authedUser = useSelector((state: RootState) => state.authedUser);
 
   const currentUser = users[authedUser];
-  const unanswered = id ? currentUser.answers[id] === undefined : false;
+  const unanswered =
+    id && currentUser ? currentUser.answers[id] === undefined : false;
 
   const totalAnswers = poll
     ? poll.optionOne.votes.length + poll.optionTwo.votes.length
@@ -44,6 +46,14 @@ function Poll() {
       )
     );
   };
+
+  if (!poll) {
+    return <Navigate to="/404" replace />;
+  }
+
+  if (!authedUser || !currentUser) {
+    return <Navigate to="/login" replace />;
+  }
 
   if (poll && unanswered) {
     return (
