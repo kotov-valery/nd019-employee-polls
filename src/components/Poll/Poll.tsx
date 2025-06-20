@@ -1,53 +1,42 @@
-import { useParams } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
-import { Navigate } from "react-router-dom";
+import { useParams, Navigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
-import { AppDispatch, RootState } from "../../redux/store";
+//
 import { handleVoteQuestion } from "../../redux/actions/questions";
+import { usePollData } from "./usePollData";
 import UnansweredPoll from "./UnansweredPoll";
 import CompletedPoll from "./CompletedPoll";
+import { AppDispatch } from "../../redux/store";
 
 function Poll() {
-  const OPTION_ONE = 1;
-
+  const { id } = useParams<{ id: string }>();
   const dispatch = useDispatch<AppDispatch>();
 
-  const { id } = useParams<{ id: string }>();
-
-  const questions = useSelector((state: RootState) => state.questions);
-  const poll = id && questions ? questions[id] : null;
-
-  const users = useSelector((state: RootState) => state.users);
-  const authedUser = useSelector((state: RootState) => state.authedUser);
-
-  const currentUser = users[authedUser];
-  const unanswered =
-    id && currentUser ? currentUser.answers[id] === undefined : false;
-
-  const totalAnswers = poll
-    ? poll.optionOne.votes.length + poll.optionTwo.votes.length
-    : 0;
-  const optionOneVotes = poll ? poll.optionOne.votes.length : 0;
-  const optionTwoVotes = poll ? poll.optionTwo.votes.length : 0;
-
-  const pollAuthor = poll ? users[poll.author] : null;
-  const pollAuthorAvatar = pollAuthor ? pollAuthor.avatarURL : "";
+  const {
+    poll,
+    currentUser,
+    unanswered,
+    totalAnswers,
+    optionOneVotes,
+    optionTwoVotes,
+    pollAuthorAvatar,
+    authedUser,
+  } = usePollData(id);
 
   const onHandleVote = (option: number) => {
     if (!id) return;
 
-    const uid = authedUser;
     const qid = id;
     dispatch(
       handleVoteQuestion(
-        uid,
+        authedUser,
         qid,
-        option === OPTION_ONE ? "optionOne" : "optionTwo"
+        option === 1 ? "optionOne" : "optionTwo"
       )
     );
   };
 
-  if (!poll) {
+  if (!poll || !id) {
     return <Navigate to="/404" replace />;
   }
 
@@ -55,33 +44,22 @@ function Poll() {
     return <Navigate to="/login" replace />;
   }
 
-  if (poll && unanswered) {
-    return (
-      <UnansweredPoll
-        poll={poll}
-        authorAvatar={pollAuthorAvatar}
-        onHandleVote={onHandleVote}
-      />
-    );
-  } else if (id && poll && !unanswered) {
-    const isOptionOneVoted = currentUser.answers[id] === "optionOne";
-    return (
-      <CompletedPoll
-        poll={poll}
-        authorAvatar={pollAuthorAvatar}
-        isOptionOneVoted={isOptionOneVoted}
-        optionOneVotes={optionOneVotes}
-        optionTwoVotes={optionTwoVotes}
-        totalAnswers={totalAnswers}
-      />
-    );
-  } else {
-    return (
-      <div className="poll-container">
-        <p>Poll not found.</p>
-      </div>
-    );
-  }
+  return unanswered ? (
+    <UnansweredPoll
+      poll={poll}
+      authorAvatar={pollAuthorAvatar}
+      onHandleVote={onHandleVote}
+    />
+  ) : (
+    <CompletedPoll
+      poll={poll}
+      authorAvatar={pollAuthorAvatar}
+      isOptionOneVoted={currentUser.answers[id] === "optionOne"}
+      optionOneVotes={optionOneVotes}
+      optionTwoVotes={optionTwoVotes}
+      totalAnswers={totalAnswers}
+    />
+  );
 }
 
 export default Poll;
