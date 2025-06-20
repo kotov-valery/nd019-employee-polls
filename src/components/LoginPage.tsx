@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import { setAuthedUser } from "../redux/actions/authedUser";
 import loginLogo from "../assets/loginpage-logo.png";
@@ -9,12 +9,14 @@ function LoginPage({ userList }: { userList: any }) {
   const [selectedUser, setSelectedUser] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleLogin = () => {
     if (selectedUser) {
       dispatch(setAuthedUser(selectedUser));
       console.log(`Logged in as ${userList[selectedUser].name}`);
-      navigate("/");
+      const redirectPath = location.state?.from || "/";
+      navigate(redirectPath);
     } else {
       console.error("Please select a user to log in.");
     }
