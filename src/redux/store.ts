@@ -9,7 +9,7 @@ import middleware from "./middleware";
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: ["authedUser"], // Persist only the authedUser state
+  whitelist: ["authedUser", "users", "questions"],
 };
 
 // Cast the rootReducer to match the expected type for redux-persist
