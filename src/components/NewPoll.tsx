@@ -15,7 +15,7 @@ function NewPoll() {
 
   const currentUser = useSelector((state: RootState) => state.authedUser);
   const users = useSelector((state: RootState) => state.users);
-  const avatarURL = users[currentUser]?.avatarURL;
+  const avatarURL = currentUser ? users[currentUser]?.avatarURL : "";
 
   const onChangeOptionOne = (e: React.ChangeEvent<HTMLInputElement>) => {
     setOptionOne(e.target.value);

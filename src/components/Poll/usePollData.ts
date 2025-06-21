@@ -7,7 +7,7 @@ export function usePollData(id: string | undefined) {
   const authedUser = useSelector((state: RootState) => state.authedUser);
 
   const poll = id && questions ? questions[id] : null;
-  const currentUser = users[authedUser];
+  const currentUser = authedUser ? users[authedUser] : null;
   const unanswered =
     id && currentUser ? currentUser.answers[id] === undefined : false;
 

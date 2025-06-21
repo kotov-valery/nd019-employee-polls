@@ -1,32 +1,16 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { persistStore, persistReducer } from "redux-persist";
-import { Reducer } from "redux";
 
-import storage from "redux-persist/lib/storage"; // Use local storage
 import rootReducer from "./reducers";
 import middleware from "./middleware";
 
-const persistConfig = {
-  key: "root",
-  storage,
-  whitelist: ["authedUser", "users", "questions"],
-};
-
-// Cast the rootReducer to match the expected type for redux-persist
-const persistedReducer = persistReducer<any>(
-  persistConfig,
-  rootReducer as Reducer<any, any>
-);
-
 const Store = configureStore({
-  reducer: persistedReducer,
+  reducer: rootReducer,
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: false, // Disable serializable check for redux-persist
     }).concat(middleware),
 });
 
-export const persistor = persistStore(Store);
 export type AppStore = typeof Store;
 export type RootState = ReturnType<typeof Store.getState>;
 export type AppDispatch = typeof Store.dispatch;

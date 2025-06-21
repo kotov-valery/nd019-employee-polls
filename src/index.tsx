@@ -6,8 +6,7 @@ import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter as Router } from "react-router-dom";
 
 import { Provider } from "react-redux";
-import Store, { persistor } from "./redux/store";
-import { PersistGate } from "redux-persist/integration/react";
+import Store from "./redux/store";
 import { AuthProvider } from "./components/Login/AuthProvider";
 
 const root = ReactDOM.createRoot(
@@ -16,13 +15,11 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <Provider store={Store}>
-      <PersistGate loading={null} persistor={persistor}>
-        <AuthProvider>
-          <Router>
-            <App />
-          </Router>
-        </AuthProvider>
-      </PersistGate>
+      <AuthProvider>
+        <Router>
+          <App />
+        </Router>
+      </AuthProvider>
     </Provider>
   </React.StrictMode>
 );
