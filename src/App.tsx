@@ -78,9 +78,17 @@ function App() {
           />
           <Route path="/login" element={<LoginPage userList={userList} />} />
           <Route
-            path="*"
+            path="/404"
             element={
               <Protected>
+                <NotFound />
+              </Protected>
+            }
+          />
+          <Route
+            path="*"
+            element={
+              <Protected notFound={true}>
                 <NotFound />
               </Protected>
             }
