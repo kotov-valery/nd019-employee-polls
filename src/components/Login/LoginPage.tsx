@@ -2,8 +2,8 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 
-import { setAuthedUser } from "../redux/actions/authedUser";
-import loginLogo from "../assets/loginpage-logo.png";
+import { setAuthedUser } from "../../redux/actions/authedUser";
+import loginLogo from "../../assets/loginpage-logo.png";
 
 function LoginPage({ userList }: { userList: any }) {
   const [selectedUser, setSelectedUser] = useState("");

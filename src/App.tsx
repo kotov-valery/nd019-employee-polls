@@ -6,7 +6,7 @@ import { Navigate, useLocation } from "react-router-dom";
 
 // Local imports
 import "./App.css";
-import LoginPage from "./components/LoginPage";
+import LoginPage from "./components/Login/LoginPage";
 import { _getQuestions, _getUsers } from "./backend/_DATA";
 import Dashboard from "./components/dashboard/Dashboard";
 import Nav from "./components/Nav";
