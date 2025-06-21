@@ -59,7 +59,14 @@ function App() {
               </Protected>
             }
           />
-          <Route path="/add" element={<NewPoll />} />
+          <Route
+            path="/add"
+            element={
+              <Protected>
+                <NewPoll />
+              </Protected>
+            }
+          />
           <Route
             path="/leaderboard"
             element={
