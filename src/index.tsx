@@ -8,6 +8,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 import { Provider } from "react-redux";
 import Store, { persistor } from "./redux/store";
 import { PersistGate } from "redux-persist/integration/react";
+import { AuthProvider } from "./components/Login/AuthProvider";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -16,9 +17,11 @@ root.render(
   <React.StrictMode>
     <Provider store={Store}>
       <PersistGate loading={null} persistor={persistor}>
-        <Router>
-          <App />
-        </Router>
+        <AuthProvider>
+          <Router>
+            <App />
+          </Router>
+        </AuthProvider>
       </PersistGate>
     </Provider>
   </React.StrictMode>
