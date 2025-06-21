@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 
 import { AuthContext } from "./AuthContext";
-import { setAuthedUser } from "../../redux/actions/authedUser";
+import { setAuthedUser, logoutUser } from "../../redux/actions/authedUser";
 import { AppDispatch, RootState } from "../../redux/store";
 
 const AuthProvider = ({ children }: { children: React.ReactNode }) => {
@@ -12,7 +12,7 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     return authedUser !== null && authedUser !== undefined && authedUser !== "";
   };
 
-  const loginUser = (userId: string) => {
+  const login = (userId: string) => {
     if (userId) {
       dispatch(setAuthedUser(userId));
     } else {
@@ -20,16 +20,17 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     }
   };
 
-  const logoutUser = () => {
-    dispatch({ type: "LOGOUT_USER" });
+  const logout = () => {
+    dispatch(logoutUser());
   };
 
   return (
     <AuthContext.Provider
       value={{
+        authedUser,
         isUserAuthenticated,
-        loginUser,
-        logoutUser,
+        login,
+        logout,
       }}
     >
       {children}

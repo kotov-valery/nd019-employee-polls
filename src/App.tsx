@@ -1,22 +1,23 @@
 // Global imports
-import { useEffect, Fragment } from "react";
+import { useEffect, Fragment, useContext } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Routes, Route } from "react-router-dom";
-import { Navigate, useLocation } from "react-router-dom";
 
 // Local imports
 import "./App.css";
+
+import { handleInitialData } from "./redux/actions/init";
+import { AppDispatch } from "./redux/store";
+
 import LoginPage from "./components/Login/LoginPage";
-import { _getQuestions, _getUsers } from "./backend/_DATA";
+import User from "./components/User";
 import Dashboard from "./components/dashboard/Dashboard";
 import Nav from "./components/Nav";
 import NewPoll from "./components/NewPoll";
-import User from "./components/User";
 import Leaderboard from "./components/Leaderboard/Leaderboard";
-import { handleInitialData } from "./redux/actions/init";
-import { AppDispatch } from "./redux/store";
+
 import Poll from "./components/Poll/Poll";
-import NotFound from "./components/NotFound";
+import { AuthContext } from "./components/Login/AuthContext";
 
 function Loading() {
   return <div>Loading...</div>;
@@ -24,66 +25,39 @@ function Loading() {
 
 function App() {
   const dispatch: AppDispatch = useDispatch();
-  const location = useLocation();
 
   const userList = useSelector((state: any) => state.users);
-  const authedUser = useSelector((state: any) => state.authedUser);
   const isLoading = useSelector((state: any) => state.loading);
+
+  const { authedUser, isUserAuthenticated } = useContext(AuthContext);
 
   useEffect(() => {
     dispatch(handleInitialData());
   }, [dispatch]);
 
-  if (isLoading) {
+  if (isLoading || !userList) {
     return <Loading />;
   }
 
   return (
     <Fragment>
       <header className="app-header">
-        {authedUser && <Nav />}
-        {authedUser && <User authedUser={authedUser} />}
+        {isUserAuthenticated() && <Nav />}
+        {isUserAuthenticated() && authedUser && (
+          <User authedUser={authedUser} />
+        )}
       </header>
       <div className="container">
         <Routes>
-          <Route
-            path="/login"
-            element={
-              authedUser ? (
-                <Navigate to={location.state?.from || "/"} replace />
-              ) : (
-                <LoginPage userList={userList} />
-              )
-            }
-          />
-          <Route
-            path="/"
-            element={
-              authedUser ? <Dashboard /> : <Navigate to="/login" replace />
-            }
-          />
-          <Route
-            path="/add"
-            element={
-              authedUser ? <NewPoll /> : <Navigate to="/login" replace />
-            }
-          />
+          <Route path="/" element={<Dashboard />} />
+          <Route path="/add" element={<NewPoll />} />
           <Route
             path="/leaderboard"
-            element={
-              authedUser ? (
-                <Leaderboard userList={userList} />
-              ) : (
-                <Navigate to="/login" replace />
-              )
-            }
+            element={<Leaderboard userList={userList} />}
           />
-          <Route
-            path="/questions/:id"
-            element={authedUser ? <Poll /> : <Navigate to="/login" replace />}
-          />
-          <Route path="/404" element={<NotFound />} />
-          <Route path="*" element={<NotFound />} />
+          <Route path="/questions/:id" element={<Poll />} />
+          <Route path="/login" element={<LoginPage userList={userList} />} />
+          <Route path="*" element={<LoginPage userList={userList} />} />
         </Routes>
       </div>
     </Fragment>
