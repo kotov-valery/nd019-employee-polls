@@ -17,7 +17,9 @@ import NewPoll from "./components/NewPoll";
 import Leaderboard from "./components/Leaderboard/Leaderboard";
 
 import Poll from "./components/Poll/Poll";
+import Protected from "./components/Login/Protected";
 import { AuthContext } from "./components/Login/AuthContext";
+import NotFound from "./components/NotFound";
 
 function Loading() {
   return <div>Loading...</div>;
@@ -49,15 +51,40 @@ function App() {
       </header>
       <div className="container">
         <Routes>
-          <Route path="/" element={<Dashboard />} />
+          <Route
+            path="/"
+            element={
+              <Protected>
+                <Dashboard />
+              </Protected>
+            }
+          />
           <Route path="/add" element={<NewPoll />} />
           <Route
             path="/leaderboard"
-            element={<Leaderboard userList={userList} />}
+            element={
+              <Protected>
+                <Leaderboard userList={userList} />
+              </Protected>
+            }
           />
-          <Route path="/questions/:id" element={<Poll />} />
+          <Route
+            path="/questions/:id"
+            element={
+              <Protected>
+                <Poll />
+              </Protected>
+            }
+          />
           <Route path="/login" element={<LoginPage userList={userList} />} />
-          <Route path="*" element={<LoginPage userList={userList} />} />
+          <Route
+            path="*"
+            element={
+              <Protected>
+                <NotFound />
+              </Protected>
+            }
+          />
         </Routes>
       </div>
     </Fragment>

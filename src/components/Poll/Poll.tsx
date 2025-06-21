@@ -37,7 +37,6 @@ function Poll() {
   };
 
   if (!poll || !id) {
-    // Log the user out if the poll is invalid
     dispatch(logoutUser());
     return <Navigate to="/login" state={{ from: "/404" }} replace />;
   }
