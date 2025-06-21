@@ -1,16 +1,20 @@
 import { useParams, Navigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
+import { AppDispatch } from "../../redux/store";
+import { AuthContext } from "../Login/AuthContext";
+
 import { handleVoteQuestion } from "../../redux/actions/questions";
-import { logoutUser } from "../../redux/actions/authedUser";
+
 import { usePollData } from "./usePollData";
 import UnansweredPoll from "./UnansweredPoll";
 import CompletedPoll from "./CompletedPoll";
-import { AppDispatch } from "../../redux/store";
+import { useContext } from "react";
 
 function Poll() {
   const { id } = useParams<{ id: string }>();
   const dispatch = useDispatch<AppDispatch>();
+  const { isUserAuthenticated, logout, authedUser } = useContext(AuthContext);
 
   const {
     poll,
@@ -20,11 +24,10 @@ function Poll() {
     optionOneVotes,
     optionTwoVotes,
     pollAuthorAvatar,
-    authedUser,
   } = usePollData(id);
 
   const onHandleVote = (option: number) => {
-    if (!id) return;
+    if (!id || !authedUser) return;
 
     const qid = id;
     dispatch(
@@ -37,11 +40,11 @@ function Poll() {
   };
 
   if (!poll || !id) {
-    dispatch(logoutUser());
-    return <Navigate to="/login" state={{ from: "/404" }} replace />;
+    logout();
+    return <Navigate to="/login" state={{ path: "/404" }} replace />;
   }
 
-  if (!authedUser || !currentUser) {
+  if (!isUserAuthenticated() || !currentUser) {
     return <Navigate to="/login" replace />;
   }
 

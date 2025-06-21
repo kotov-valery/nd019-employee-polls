@@ -28,6 +28,5 @@ export function usePollData(id: string | undefined) {
     optionOneVotes,
     optionTwoVotes,
     pollAuthorAvatar,
-    authedUser,
   };
 }
