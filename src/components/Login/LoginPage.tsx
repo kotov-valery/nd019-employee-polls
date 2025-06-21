@@ -1,22 +1,24 @@
-import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useContext, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
-import { setAuthedUser } from "../../redux/actions/authedUser";
-import loginLogo from "../../assets/loginpage-logo.png";
+import { UserList } from "../../backend/Types";
 
-function LoginPage({ userList }: { userList: any }) {
+import loginLogo from "../../assets/loginpage-logo.png";
+import { AuthContext } from "./AuthContext";
+
+function LoginPage({ userList }: { userList: UserList }) {
   const [selectedUser, setSelectedUser] = useState("");
-  const dispatch = useDispatch();
+
+  const authContext = useContext(AuthContext);
+
   const navigate = useNavigate();
   const location = useLocation();
 
-  const handleLogin = () => {
+  const handleLogin = (event: any) => {
+    event.preventDefault();
     if (selectedUser) {
-      dispatch(setAuthedUser(selectedUser));
-      console.log(`Logged in as ${userList[selectedUser].name}`);
-      const redirectPath = location.state?.from || "/";
-      navigate(redirectPath);
+      authContext.login(selectedUser);
+      navigate(location.state?.path || "/");
     } else {
       console.error("Please select a user to log in.");
     }

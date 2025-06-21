@@ -1,16 +1,20 @@
-import { useDispatch } from "react-redux";
-import { AppDispatch, RootState } from "../redux/store";
-import { logoutUser } from "../redux/actions/authedUser";
 import { useSelector } from "react-redux";
+import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
+
+import { RootState } from "../redux/store";
+import { AuthContext } from "./Login/AuthContext";
 
 function User({ authedUser }: { authedUser: string }) {
-  const dispatch = useDispatch<AppDispatch>();
+  const authContext = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const users = useSelector((state: RootState) => state.users);
   const userAvatar = users[authedUser]?.avatarURL;
 
   const onHandleLogout = () => {
-    dispatch(logoutUser());
+    authContext.logout();
+    navigate("/login");
   };
 
   if (!authedUser || authedUser === "") {

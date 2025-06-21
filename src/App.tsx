@@ -7,7 +7,7 @@ import { Routes, Route } from "react-router-dom";
 import "./App.css";
 
 import { handleInitialData } from "./redux/actions/init";
-import { AppDispatch } from "./redux/store";
+import { AppDispatch, RootState } from "./redux/store";
 
 import LoginPage from "./components/Login/LoginPage";
 import User from "./components/User";
@@ -26,8 +26,8 @@ function Loading() {
 function App() {
   const dispatch: AppDispatch = useDispatch();
 
-  const userList = useSelector((state: any) => state.users);
-  const isLoading = useSelector((state: any) => state.loading);
+  const userList = useSelector((state: RootState) => state.users);
+  const isLoading = useSelector((state: RootState) => state.loading);
 
   const { authedUser, isUserAuthenticated } = useContext(AuthContext);
 
