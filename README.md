@@ -40,7 +40,7 @@ The Employee Polls application is a React-based web app that allows users to cre
 
 In the project directory, you can run:
 
-### `npm install`
+#### `npm install`
 Installs dependencies required for the project.
 
 #### `npm start`
