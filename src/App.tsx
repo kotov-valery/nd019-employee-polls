@@ -8,6 +8,7 @@ import "./App.css";
 
 import { handleInitialData } from "./redux/actions/init";
 import { AppDispatch, RootState } from "./redux/store";
+import { AuthContext } from "./components/Login/AuthContext";
 
 import LoginPage from "./components/Login/LoginPage";
 import User from "./components/User";
@@ -15,15 +16,10 @@ import Dashboard from "./components/dashboard/Dashboard";
 import Nav from "./components/Nav";
 import NewPoll from "./components/NewPoll";
 import Leaderboard from "./components/Leaderboard/Leaderboard";
-
 import Poll from "./components/Poll/Poll";
 import Protected from "./components/Login/Protected";
-import { AuthContext } from "./components/Login/AuthContext";
 import NotFound from "./components/NotFound";
-
-function Loading() {
-  return <div>Loading...</div>;
-}
+import LoadingBar from "./components/LoadingBar";
 
 function App() {
   const dispatch: AppDispatch = useDispatch();
@@ -38,7 +34,7 @@ function App() {
   }, [dispatch]);
 
   if (isLoading || !userList) {
-    return <Loading />;
+    return <LoadingBar isLoading={isLoading} />;
   }
 
   return (

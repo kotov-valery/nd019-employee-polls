@@ -1,3 +1,4 @@
+import { useContext } from "react";
 import { useParams, Navigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -9,7 +10,7 @@ import { handleVoteQuestion } from "../../redux/actions/questions";
 import { usePollData } from "./usePollData";
 import UnansweredPoll from "./UnansweredPoll";
 import CompletedPoll from "./CompletedPoll";
-import { useContext } from "react";
+import LoadingBar from "../LoadingBar";
 
 function Poll() {
   const { id } = useParams<{ id: string }>();
@@ -42,7 +43,7 @@ function Poll() {
   };
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <LoadingBar isLoading={isLoading} />;
   }
 
   if (!poll || !id) {
