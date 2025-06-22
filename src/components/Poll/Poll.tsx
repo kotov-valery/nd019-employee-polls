@@ -1,7 +1,7 @@
 import { useParams, Navigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
-import { AppDispatch } from "../../redux/store";
+import { AppDispatch, RootState } from "../../redux/store";
 import { AuthContext } from "../Login/AuthContext";
 
 import { handleVoteQuestion } from "../../redux/actions/questions";
@@ -14,7 +14,9 @@ import { useContext } from "react";
 function Poll() {
   const { id } = useParams<{ id: string }>();
   const dispatch = useDispatch<AppDispatch>();
-  const { isUserAuthenticated, logout, authedUser } = useContext(AuthContext);
+  const { isUserAuthenticated, authedUser } = useContext(AuthContext);
+
+  const isLoading = useSelector((state: RootState) => state.loading);
 
   const {
     poll,
@@ -39,9 +41,12 @@ function Poll() {
     );
   };
 
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
   if (!poll || !id) {
-    logout();
-    return <Navigate to="/login" state={{ path: "/404" }} replace />;
+    return <Navigate to="/404" replace />;
   }
 
   if (!isUserAuthenticated() || !currentUser) {
